@@ -20,25 +20,20 @@
   }
 
   :root{
-    --cream: #F4F0E6;
-    --black: #0A0A0A;
-    --canvas: 960px;
+    --cream: #FFF8F3;
+    --black: #070707;
+    --max: 1400px;
+    --inset: clamp(24px, 3.2vw, 56px);
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
 
-  html, body{
-    background: var(--black);
-  }
+  html, body{ background: var(--black); }
 
   body{
     color: var(--cream);
     font-family: 'JetBrains Mono', monospace;
     -webkit-font-smoothing: antialiased;
-    /* fixed design canvas: content never scales down/up with viewport,
-       the black background simply continues to fill whatever space
-       is left around the centered canvas */
-    min-width: var(--canvas);
   }
 
   a{ color: inherit; text-decoration: none; }
@@ -53,25 +48,23 @@
   }
 
   .header-inner{
-    width: var(--canvas);
+    width: 100%;
+    max-width: var(--max);
     margin: 0 auto;
+    padding: 20px var(--inset);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0;
   }
 
   .logo{
-    font-size: 14px;
-    letter-spacing: 0.08em;
+    font-size: 16px;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
     font-weight: 500;
   }
 
-  nav{
-    display: flex;
-    gap: 10px;
-  }
+  nav{ display: flex; gap: 10px; }
 
   nav button{
     font-family: 'JetBrains Mono', monospace;
@@ -90,10 +83,12 @@
   nav button:hover{ opacity: 0.5; }
   nav button.is-pressed{ transform: scale(0.85); }
 
-  /* ---------- PAGE CANVAS ---------- */
+  /* ---------- PAGE: fluid up to a hard cap, centered, empty side margins beyond it ---------- */
   .page{
-    width: var(--canvas);
+    width: 100%;
+    max-width: var(--max);
     margin: 0 auto;
+    padding: 0 var(--inset);
     position: relative;
     background: var(--black);
   }
@@ -101,7 +96,7 @@
   /* ---------- HERO ---------- */
   .hero{
     position: relative;
-    padding-top: 96px;
+    padding-top: 148px;
   }
 
   @keyframes levitate{
@@ -113,42 +108,60 @@
   .chrome-el{
     position: absolute;
     animation: levitate 5s ease-in-out infinite;
-    transition: transform .5s cubic-bezier(.22,1,.36,1);
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1);
     will-change: transform;
   }
   .chrome-el img{ width: 100%; display:block; }
 
   .hero-ring{
     top: -10px;
-    left: 30px;
-    width: 232px;
+    left: 0;
+    width: 24%;
     animation-delay: 0s;
   }
-  .hero-ring:hover{ transform: translate(-10px, -18px); }
+  .hero-ring:hover{ transform: translate(-34px, -26px) rotate(-8deg); }
+
+  /* title image + blob scale together, proportionally, as one unit */
+  .title-wrap{
+    position: relative;
+    width: 100%;
+  }
+
+  .hero-title-img{
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
 
   .hero-blob{
-    top: 300px;
-    left: 520px;
-    width: 262px;
+    top: auto;
+    right: -2%;
+    bottom: -28%;
+    width: 29%;
     z-index: 3;
     animation-delay: 1.2s;
   }
-  .hero-blob:hover{ transform: translate(14px, -12px); }
+  .hero-blob:hover{ transform: translate(38px, -22px) rotate(7deg); }
 
-  .hero-title-img{
-    width: 900px;
-    display: block;
-    margin: 0 auto;
+  .hero-sub{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: clamp(14px, 1.4vw, 20px);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: clamp(40px, 7vw, 90px);
     position: relative;
-    z-index: 2;
+    z-index: 1;
   }
 
   /* ---------- ABOUT ---------- */
   .about{
     display: grid;
-    grid-template-columns: 310px 1fr;
-    gap: 60px;
-    align-items: start;
+    grid-template-columns: minmax(220px, 310px) 1fr;
+    gap: clamp(30px, 5vw, 60px);
+    align-items: end;
     padding: 70px 0 110px;
   }
 
@@ -168,10 +181,10 @@
 
   .about-text p{
     font-size: 16px;
-    line-height: 1.55;
+    line-height: 1.28;
     color: var(--cream);
     max-width: 560px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .about-text p:last-child{ margin-bottom: 0; }
 </style>
@@ -193,8 +206,11 @@
 
     <section class="hero">
       <div class="chrome-el hero-ring"><img src="images/hero-ring.png" alt=""></div>
-      <img class="hero-title-img" src="images/hero-title.png" alt="Виктория Митрофанова — Портфолио. Коммуникационный дизайнер">
-      <div class="chrome-el hero-blob"><img src="images/hero-blob.png" alt=""></div>
+
+      <div class="title-wrap">
+        <img class="hero-title-img" src="images/hero-title.png" alt="Виктория Митрофанова — Портфолио. Коммуникационный дизайнер">
+        <div class="chrome-el hero-blob"><img src="images/hero-blob.png" alt=""></div>
+      </div>
     </section>
 
     <section class="about">
