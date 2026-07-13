@@ -22,13 +22,16 @@
   :root{
     --cream: #FFF8F3;
     --black: #070707;
-    --max: 1400px;
-    --inset: clamp(24px, 3.2vw, 56px);
+    --max: 1440px;
+    --inset: 60px;
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
 
-  html, body{ background: var(--black); }
+  html, body{
+    background: var(--black);
+    overflow-x: hidden;
+  }
 
   body{
     color: var(--cream);
@@ -38,6 +41,15 @@
 
   a{ color: inherit; text-decoration: none; }
 
+  img{
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
   /* ---------- HEADER (full-bleed cream bar, fixed to top) ---------- */
   header{
     position: fixed;
@@ -45,6 +57,7 @@
     z-index: 100;
     background: var(--cream);
     color: var(--black);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
   }
 
   .header-inner{
@@ -58,24 +71,25 @@
   }
 
   .logo{
-    font-size: 16px;
+    font-size: 20.4px;
     letter-spacing: 0.03em;
     text-transform: uppercase;
     font-weight: 500;
+    cursor: pointer;
   }
 
   nav{ display: flex; gap: 10px; }
 
   nav button{
     font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
+    font-size: 20.4px;
     letter-spacing: 0.03em;
     text-transform: uppercase;
     background: transparent;
-    border: 1px solid var(--black);
+    border: 2.25px solid var(--black);
     color: var(--black);
-    border-radius: 30px;
-    padding: 6px 22px;
+    border-radius: 40px;
+    padding: 8px 34px;
     cursor: pointer;
     transition: opacity .25s ease, transform .18s ease;
   }
@@ -87,7 +101,7 @@
   .page{
     width: 100%;
     max-width: var(--max);
-    margin: 0 auto;
+    margin: -60px auto 0;
     padding: 0 var(--inset);
     position: relative;
     background: var(--black);
@@ -96,7 +110,7 @@
   /* ---------- HERO ---------- */
   .hero{
     position: relative;
-    padding-top: 148px;
+    padding-top: 198px;
   }
 
   @keyframes levitate{
@@ -104,9 +118,25 @@
     50%  { transform: translateY(-14px); }
     100% { transform: translateY(0px); }
   }
+  @keyframes levitate2{
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-9px); }
+    100% { transform: translateY(0px); }
+  }
+  @keyframes levitate3{
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-19px); }
+    100% { transform: translateY(0px); }
+  }
+  @keyframes levitate4{
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-11px); }
+    100% { transform: translateY(0px); }
+  }
 
   .chrome-el{
     position: absolute;
+    left:60%;
     animation: levitate 5s ease-in-out infinite;
     transition: transform .35s cubic-bezier(.34,1.56,.64,1);
     will-change: transform;
@@ -117,9 +147,9 @@
     top: -10px;
     left: 0;
     width: 24%;
+    animation: levitate 5.4s ease-in-out infinite;
     animation-delay: 0s;
   }
-  .hero-ring:hover{ transform: translate(-34px, -26px) rotate(-8deg); }
 
   /* title image + blob scale together, proportionally, as one unit */
   .title-wrap{
@@ -137,18 +167,18 @@
   .hero-blob{
     top: auto;
     right: -2%;
-    bottom: -28%;
-    width: 29%;
+    bottom: calc(-28% - 50px);
+    width: 43.5%;
     z-index: 3;
+    animation: levitate3 6.1s ease-in-out infinite;
     animation-delay: 1.2s;
   }
-  .hero-blob:hover{ transform: translate(38px, -22px) rotate(7deg); }
 
   .hero-sub{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: clamp(14px, 1.4vw, 20px);
+    font-size: clamp(9.52px, 0.952vw, 13.6px);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     margin-top: clamp(40px, 7vw, 90px);
@@ -159,7 +189,7 @@
   /* ---------- ABOUT ---------- */
   .about{
     display: grid;
-    grid-template-columns: minmax(220px, 310px) 1fr;
+    grid-template-columns: 1fr 1.9fr;
     gap: clamp(30px, 5vw, 60px);
     align-items: end;
     padding: 70px 0 110px;
@@ -171,29 +201,317 @@
     filter: grayscale(1);
   }
 
+  .about-text{
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
   .about-text h2{
-    font-size: 22px;
+    font-size: 38.76px;
     font-weight: 500;
     letter-spacing: 0.02em;
-    margin-bottom: 22px;
+    margin-bottom: 42px;
     text-transform: uppercase;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
   }
 
   .about-text p{
-    font-size: 16px;
-    line-height: 1.28;
+    font-size: 20.4px;
+    line-height: 24.412px;
     color: var(--cream);
-    max-width: 560px;
-    margin-bottom: 16px;
+    margin-bottom: 45px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+    text-wrap: pretty;
   }
   .about-text p:last-child{ margin-bottom: 0; }
+
+  /* ---------- RESUME ---------- */
+  .resume{
+    padding: 0 0 60px;
+    scroll-margin-top: 110px;
+  }
+
+  .resume-title{
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .resume-divider{
+    height: 2.25px;
+    background: var(--cream);
+    width: 100%;
+  }
+
+  .resume-row{
+    display: grid;
+    grid-template-columns: 0.65fr 1fr 0.8fr 1.6fr;
+    gap: 24px;
+    padding: 40px 0;
+    font-size: 20.4px;
+    line-height: 24.412px;
+    align-items: center;
+  }
+
+  .resume-row div{ color: var(--cream); }
+
+  /* ---------- SKILLS / INTERESTS ---------- */
+  .skills{
+    position: relative;
+    padding: 30px 0 260px;
+  }
+
+  .skills-grid{
+    display: grid;
+    grid-template-columns: minmax(0, max-content) minmax(0, max-content);
+    justify-content: end;
+    gap: 150px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .skills-col-right{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skills-col-right .interests{
+    margin-top: 70px;
+  }
+
+  .skills-col h3{
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 42px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
+  .skills-list{
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: var(--cream);
+  }
+
+  .icon-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.1px;
+    width: 105px;
+    margin-top: 33px;
+  }
+  .icon-grid img{ width: 100%; display: block; }
+
+  .skills-chrome-1{
+    left: calc(-6% - 50px);
+    top: calc(-10% - 15px);
+    width: 54.4%;
+    z-index: 1;
+    animation: levitate2 4.7s ease-in-out infinite;
+    animation-delay: .6s;
+  }
+  .skills-chrome-2{
+    left: auto;
+    right: calc(4% - 140px);
+    top: 46%;
+    width: 19%;
+    z-index: 1;
+    animation: levitate4 5.9s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  .skills-chrome-3{
+    left: calc(40% + 100px);
+    bottom: calc(-34% + 500px);
+    width: 27.6%;
+    z-index: 1;
+    animation: levitate 6.6s ease-in-out infinite;
+    animation-delay: 1.4s;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 960 / 1473;
+    margin-top: -260px;
+  }
+
+  .projects-title-img{
+    position: absolute;
+    left: 0;
+    top: 4.1%;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .projects-body{
+    position: absolute;
+    inset: 0;
+    transform: translateY(-30px);
+  }
+
+  .project-card{
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    z-index: 3;
+    cursor: pointer;
+    transition: transform .35s cubic-bezier(.25,.8,.35,1);
+  }
+  .project-card:hover{ transform: scale(0.96); }
+
+  .card-inner{
+    position: relative;
+    width: 100%;
+  }
+
+  .card-inner img{
+    width: 100%;
+    display: block;
+  }
+
+  .card-bw{
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-color{
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity .22s ease;
+  }
+  .project-card:hover .card-color{ opacity: 1; }
+
+  .card-1{ left: 11.0%; top: 20.0%; width: 38.3%; }
+  .card-2{ left: 56.7%; top: 43.7%; width: 34.8%; z-index: 5; }
+  .card-3{ left: 4.8%; top: 49.0%; width: 34.8%; }
+  .card-4{ left: 42.5%; top: 68.8%; width: 37.1%; }
+
+  .projects-chrome-1{
+    left: 46.7%;
+    top: calc(20.2% - 50px);
+    width: 49.3%;
+    z-index: 4;
+    animation: levitate3 5.2s ease-in-out infinite;
+    animation-delay: .3s;
+  }
+  .projects-chrome-2{
+    left: 83.7%;
+    top: 56.9%;
+    width: 22.9%;
+    z-index: 6;
+    animation: levitate2 6.4s ease-in-out infinite;
+    animation-delay: 1.7s;
+  }
+  .projects-chrome-3{
+    left: calc(4.8% + 40px);
+    top: 74.4%;
+    width: 47.4%;
+    z-index: 10;
+    animation: levitate4 5.6s ease-in-out infinite;
+    animation-delay: .9s;
+  }
+
+  /* ---------- CONTACTS ---------- */
+  .contacts{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 960 / 274;
+    margin-top: -90px;
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+
+  .contacts-title-img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .contacts-chrome-bottom{
+    left: 17%;
+    top: calc(20% + 85px);
+    width: 66%;
+    z-index: 3;
+    animation: levitate 6.8s ease-in-out infinite;
+    animation-delay: .5s;
+  }
+
+  .contacts-info{
+    position: absolute;
+    left: 3.75%;
+    top: calc(58% + 20px);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .contacts-email{
+    display: block;
+    font-size: 16.32px;
+  }
+
+  .contacts-location{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16.32px;
+  }
+
+  .location-icon{
+    width: 18px;
+    height: auto;
+    display: block;
+  }
+
+  .contacts-buttons{
+    position: absolute;
+    right: 3.64%;
+    top: calc(58% + 20px);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+  }
+
+  .contacts-buttons a{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 2.25px solid var(--cream);
+    color: var(--cream);
+    border-radius: 40px;
+    padding: 8px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: opacity .25s ease, transform .18s ease;
+  }
+  .contacts-buttons a:hover{ opacity: 0.5; }
+  .contacts-buttons a.is-pressed{ transform: scale(0.85); }
+  .btn-arrow{ font-size: 23.46px; line-height: 1; }
 </style>
 </head>
 <body>
 
   <header>
     <div class="header-inner">
-      <div class="logo">Виктория Митрофанова</div>
+      <div class="logo" id="logoScrollTop">Виктория Митрофанова</div>
       <nav>
         <button data-target="resume">Резюме</button>
         <button data-target="projects">Проекты</button>
@@ -205,30 +523,189 @@
   <div class="page">
 
     <section class="hero">
-      <div class="chrome-el hero-ring"><img src="images/hero-ring.png" alt=""></div>
+      <div class="chrome-el hero-ring"><img src="images/hero-ring.png" alt="" draggable="false"></div>
 
       <div class="title-wrap">
-        <img class="hero-title-img" src="images/hero-title.png" alt="Виктория Митрофанова — Портфолио. Коммуникационный дизайнер">
-        <div class="chrome-el hero-blob"><img src="images/hero-blob.png" alt=""></div>
+        <img class="hero-title-img" src="images/hero-title.png" alt="Виктория Митрофанова — Портфолио. Коммуникационный дизайнер" draggable="false">
+        <div class="chrome-el hero-blob"><img src="images/hero-blob.png" alt="" draggable="false"></div>
       </div>
     </section>
 
     <section class="about">
       <div class="about-photo">
-        <img src="images/photo.png" alt="Виктория Митрофанова">
+        <img src="images/photo.png" alt="Виктория Митрофанова" draggable="false">
       </div>
       <div class="about-text">
         <h2>Привет!</h2>
-        <p>Я&#8239;Вика — дизайнер коммуникаций. Последние 5&#8239;лет я&#8239;работаю в&#8239;маркетинге и&#8239;помогаю брендам строить свой уникальный визуальный язык.</p>
-        <p>Я специализируюсь на&#8239;разных задачах от&#8239;создания айдентики, до&#8239;сборки понятных, рабочих гайдлайнов и&#8239;дирекшена.</p>
-        <p>Мой бэкграунд позволяет мне смотреть на&#8239;дизайн не&#8239;только как&#8239;на эстетику, но&#8239;и как&#8239;на инструмент, который помогает выстраивать коммуникацию с&#8239;пользователем.</p>
+        <p>Я&#8239;Вика — дизайнер коммуникаций. Последние 5&#8239;лет я&#8239;работаю в&#8239;маркетинге и&#8239;помогаю брендам строить свой уникальный визуальный язык.</p>
+        <p>Я&#8239;специализируюсь на&#8239;разных задачах от&#8239;создания айдентики, до&#8239;сборки понятных, рабочих гайдлайнов и&#8239;дирекшена.</p>
+        <p>Мой бэкграунд позволяет мне смотреть на&#8239;дизайн не&#8239;только как&#8239;на эстетику, но&#8239;и как&#8239;на инструмент, который помогает выстраивать коммуникацию с&#8239;пользователем.</p>
+      </div>
+    </section>
+
+    <section class="resume" id="resume">
+      <h2 class="resume-title">Резюме</h2>
+      <div class="resume-divider"></div>
+
+      <div class="resume-row">
+        <div class="resume-company">Яндекс&#8239;Маркет</div>
+        <div class="resume-role">Старший дизайнер коммуникаций</div>
+        <div class="resume-period">2024/сейчас</div>
+        <div class="resume-desc">Создание KV и&#8239;айдентики бренд-проектов и&#8239;рекламных кампаний. Внедрение системного подхода к&#8239;дизайну и&#8239;сборка гайдлайнов. Дирекшен внешних и&#8239;внутренних коммуникаций, работа с&#8239;прямыми эфирами.</div>
+      </div>
+      <div class="resume-divider"></div>
+
+      <div class="resume-row">
+        <div class="resume-company">Ozon</div>
+        <div class="resume-role">Дизайнер<br>коммуникаций</div>
+        <div class="resume-period">2021/2024</div>
+        <div class="resume-desc">Разработка KV и&#8239;айдентики рекламных кампаний. Создание гайдлайнов, методических материалов. Дирекшен подрядчиков, подготовка коммуникаций для&#8239;диджитал каналов.</div>
+      </div>
+      <div class="resume-divider"></div>
+
+      <div class="resume-row">
+        <div class="resume-company">Burkalo production</div>
+        <div class="resume-role">Дизайнер-<br>иллюстратор</div>
+        <div class="resume-period">2021/2022</div>
+        <div class="resume-desc">Формирование визуальных концепций, раскадровок для&#8239;анимационных проектов. Создание персонажных и&#8239;прочих иллюстраций, полная подготовка статичной графики для&#8239;передачи в&#8239;моушн-дизайн.</div>
+      </div>
+      <div class="resume-divider"></div>
+    </section>
+
+    <section class="skills" id="skills">
+      <div class="skills-grid">
+        <div class="skills-col hard-skills">
+          <h3>Hard&#8201;Skills</h3>
+          <div class="skills-list">
+            <div>Айдентика и&#8239;KV</div>
+            <div>Нейросети, генеративная<br>графика</div>
+            <div>Типографика и&#8239;вёрстка</div>
+            <div>Иллюстрация</div>
+            <div>Работа с&#8239;брендбуками<br>и&#8239;гайдбуками</div>
+            <div>3D</div>
+          </div>
+          <div class="icon-grid">
+            <img src="images/icon-1.png" alt="Figma" draggable="false">
+            <img src="images/icon-2.png" alt="Illustrator" draggable="false">
+            <img src="images/icon-3.png" alt="Blender" draggable="false">
+            <img src="images/icon-4.png" alt="Photoshop" draggable="false">
+          </div>
+        </div>
+
+        <div class="skills-col-right">
+          <div class="skills-col soft-skills">
+            <h3>Soft&#8201;Skills</h3>
+            <div class="skills-list">
+              <div>Креативный подход к&#8239;задачам</div>
+              <div style="white-space:nowrap;">Структурная работа с&#8239;проектами</div>
+              <div style="white-space:nowrap;">Самостоятельное ведение проекта</div>
+              <div>Работа в&#8239;команде</div>
+              <div>Адаптивность и&#8239;быстрая<br>обучаемость</div>
+              <div>Управление подрядчиками</div>
+              <div>Конструктивный фидбек</div>
+            </div>
+          </div>
+
+          <div class="skills-col interests">
+            <h3>Интересы</h3>
+            <div class="skills-list">
+              <div>Игры</div>
+              <div>3D-дизайн</div>
+              <div>Аниме и&#8239;сериалы</div>
+              <div>Настольные игры</div>
+              <div>Велопрогулки</div>
+              <div>Китайский язык</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chrome-el skills-chrome-1"><img src="images/skills-chrome-1.png" alt="" draggable="false"></div>
+      <div class="chrome-el skills-chrome-2"><img src="images/skills-chrome-2.png" alt="" draggable="false"></div>
+      <div class="chrome-el skills-chrome-3"><img src="images/skills-chrome-3.png" alt="" draggable="false"></div>
+    </section>
+
+    <section class="projects" id="projects">
+      <img class="projects-title-img" src="images/projects-title.png" alt="Избранные проекты" draggable="false">
+
+      <div class="projects-body">
+        <a class="project-card card-1" href="project-2026.html">
+          <div class="card-inner">
+            <img class="card-bw" src="images/project-2026.png" alt="" draggable="false">
+            <img class="card-color" src="images/project-2026-color.png" alt="" draggable="false">
+          </div>
+        </a>
+
+        <div class="project-card card-2">
+          <div class="card-inner">
+            <img class="card-bw" src="images/project-2025.png" alt="" draggable="false">
+            <img class="card-color" src="images/project-2025-color.png" alt="" draggable="false">
+          </div>
+        </div>
+
+        <div class="project-card card-3">
+          <div class="card-inner">
+            <img class="card-bw" src="images/project-2024.png" alt="" draggable="false">
+            <img class="card-color" src="images/project-2024-color.png" alt="" draggable="false">
+          </div>
+        </div>
+
+        <div class="project-card card-4">
+          <div class="card-inner">
+            <img class="card-bw" src="images/project-3d.png" alt="" draggable="false">
+            <img class="card-color" src="images/project-3d-color.png" alt="" draggable="false">
+          </div>
+        </div>
+
+        <div class="chrome-el projects-chrome-1"><img src="images/projects-chrome-1.png" alt="" draggable="false"></div>
+        <div class="chrome-el projects-chrome-2"><img src="images/projects-chrome-2.png" alt="" draggable="false"></div>
+        <div class="chrome-el projects-chrome-3"><img src="images/projects-chrome-3.png" alt="" draggable="false"></div>
+      </div>
+    </section>
+
+    <section class="contacts" id="contacts">
+      <img class="contacts-title-img" src="images/contacts-title.png" alt="Контакты" draggable="false">
+
+      <div class="chrome-el contacts-chrome-bottom"><img src="images/contacts-chrome.png" alt="" draggable="false"></div>
+
+      <div class="contacts-info">
+        <span class="contacts-email">innnvinoveritas@gmail.com</span>
+        <span class="contacts-location"><img class="location-icon" src="images/location-icon.png" alt="" draggable="false">Москва</span>
+      </div>
+
+      <div class="contacts-buttons">
+        <a href="https://t.me/innnvinoveritas" target="_blank" rel="noopener">Написать&#8239;мне&#8239;в&#8239;Telegram <span class="btn-arrow">→</span></a>
+        <a href="https://vk.com/innnvinoveritas" target="_blank" rel="noopener">Написать&#8239;мне&#8239;в&#8239;ВК <span class="btn-arrow">→</span></a>
       </div>
     </section>
 
   </div>
 
 <script>
+  // Hard-block any mouse interaction with images: no context menu, no dragging
+  document.querySelectorAll('img').forEach(img => {
+    img.setAttribute('draggable', 'false');
+    img.addEventListener('contextmenu', e => e.preventDefault());
+    img.addEventListener('dragstart', e => e.preventDefault());
+  });
+
+  document.getElementById('logoScrollTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
   document.querySelectorAll('nav button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.add('is-pressed');
+      setTimeout(() => btn.classList.remove('is-pressed'), 160);
+
+      const target = document.getElementById(btn.dataset.target);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  document.querySelectorAll('.contacts-buttons a').forEach(btn => {
     btn.addEventListener('click', () => {
       btn.classList.add('is-pressed');
       setTimeout(() => btn.classList.remove('is-pressed'), 160);
