@@ -18,7 +18,7 @@
     --inset: 60px;
   }
 
-  *{ margin:0; padding:0; box-sizing:border-box; }
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
 
   html, body{
     background: var(--black);
@@ -91,6 +91,8 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
     transition: opacity .25s ease, transform .18s ease;
   }
   .p2-buttons a:hover{ opacity: 0.5; }
@@ -313,6 +315,7 @@
   document.querySelectorAll('.p2-buttons a').forEach(btn => {
     btn.addEventListener('click', () => {
       btn.classList.add('is-pressed');
+      void btn.offsetWidth;
       setTimeout(() => btn.classList.remove('is-pressed'), 160);
     });
   });
