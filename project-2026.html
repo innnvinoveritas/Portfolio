@@ -680,8 +680,8 @@
     </section>
 
     <section class="p2-video-wrap">
-      <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239019&hash=3418da3766bda32b&hd=3&autoplay=1&loop=1&muted=1"
-        allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+      <iframe src="https://kinescope.io/embed/3GeBQNKPJwis8L7Z7EjTXh?autoplay=1&muted=1&loop=1"
+        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;"
         allowfullscreen></iframe>
       <div class="p2-video-block"></div>
     </section>
@@ -695,8 +695,8 @@
     </section>
 
     <section class="p2-video-wrap">
-      <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239021&hash=183d70607b81d027&hd=3&autoplay=1&loop=1&muted=1"
-        allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+      <iframe src="https://kinescope.io/embed/irWrERKbbz41FZvr767Pbp?autoplay=1&muted=1&loop=1"
+        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;"
         allowfullscreen></iframe>
       <div class="p2-video-block"></div>
     </section>
@@ -774,8 +774,8 @@
 
       <div class="p2-sale-item p2-sale-full">
         <div class="p2-video-wrap" style="margin-top: 0; margin-bottom: 0;">
-          <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239022&hash=84c194c3beba0e7e&hd=3&autoplay=1&loop=1&muted=1"
-            allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+          <iframe src="https://kinescope.io/embed/x7KbsFV2xneMmP85ZrUxJ4?autoplay=1&muted=1&loop=1"
+            allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;"
             allowfullscreen></iframe>
           <div class="p2-video-block"></div>
         </div>
@@ -832,7 +832,11 @@
     // Cache each shape's box and only refresh it on resize/scroll, instead
     // of calling getBoundingClientRect() on every mousemove — that call
     // forces a synchronous layout/style recalculation, which is what was
-    // making this jittery in Safari.
+    // making this jittery in Safari. Re-measured again once every image on
+    // the page has actually finished loading (and shortly after, to catch
+    // any late web-font reflow), since an early measurement taken before
+    // all these photos load in can otherwise go stale and never correct
+    // itself until a resize/scroll happens.
     let boxes = [];
     function measure() {
       boxes = els.map((el) => {
@@ -843,6 +847,8 @@
     measure();
     window.addEventListener('resize', measure);
     window.addEventListener('scroll', measure, { passive: true });
+    window.addEventListener('load', measure);
+    setTimeout(measure, 1000);
 
     let mouseX = -9999, mouseY = -9999;
     let ticking = false;
