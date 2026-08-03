@@ -18,11 +18,16 @@
     --inset: 60px;
   }
 
-  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; cursor: inherit; }
 
-  html, body{
-    background: var(--black);
-    overflow-x: hidden;
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  html{ background: var(--black); cursor: url('images/cursor-arrow.png') 4 0, auto; }
+  a, button, .logo{ cursor: url('images/cursor-hand.png') 16 1, pointer; }
+  body{ overflow-x: hidden; }
+  @media (max-width: 1439px){
+    body{ overflow-x: auto; }
   }
 
   body{
@@ -64,7 +69,7 @@
   }
   .loader-text{
     font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
+    font-size: 20.4px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--cream);
@@ -78,10 +83,10 @@
   }
 
   .page{
-    width: 100%;
+    width: var(--max);
     max-width: var(--max);
     margin: 0 auto;
-    padding: 0 var(--inset) 14%;
+    padding: 0 var(--inset) 60px;
     position: relative;
   }
 
@@ -98,10 +103,17 @@
 
   .chrome-el{
     position: absolute;
-    transition: transform .35s cubic-bezier(.34,1.56,.64,1);
-    will-change: transform;
+    left: 60%;
+    top: 60%;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), translate .4s cubic-bezier(.22,1,.36,1);
+    will-change: transform, translate;
+    pointer-events: none;
   }
-  .chrome-el img{ width: 100%; display:block; }
+  .chrome-el img{ 
+      position: absolute;
+      left: 2% !important;
+      width: 100%;
+      display:block; }
 
   /* ---------- TOP BUTTONS ---------- */
   .p2-buttons{
@@ -128,10 +140,11 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    cursor: pointer;
+    cursor: url('images/cursor-hand.png') 16 1, pointer;
     appearance: none;
     -webkit-appearance: none;
     transition: opacity .25s ease, transform .18s ease;
+    will-change: transform;
   }
   .p2-buttons a:hover{ opacity: 0.5; }
   .p2-buttons a.is-pressed{ transform: scale(0.85); }
@@ -218,7 +231,7 @@
   .p2-gallery .chrome-el img{ width: 100%; display: block; }
 
   .p2-gallery-chrome-center{
-    left: 30.9%;
+    left: 31.9%;
     top: 26.1%;
     width: 38.6%;
     z-index: 1;
@@ -282,23 +295,336 @@
     left: 52.1%;
     top: 59.8%;
     width: 46%;
-    z-index: 2;
+    z-index: 4;
   }
   .p2-sc-chrome-1{
     left: 50.3%;
-    top: 39.9%;
-    width: 47.7%;
-    z-index: 1;
+    top: calc(39.9% - 110px);
+    width: 55%;
+    z-index: 3;
   }
   .p2-sc-chrome-2{
     left: 10.4%;
-    top: 83.3%;
-    width: 31.25%;
-    z-index: 1;
+    top: calc(83.3% - 120px);
+    width: 37%;
+    z-index: 3;
+  }
+
+  /* ---------- GLOBAL PROMO (block 6) ---------- */
+  .p2-promo{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 576 / 1135;
+    margin-top: 60px;
+  }
+
+  .p2-promo img{ display: block; }
+
+  .p2-promo-text{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 36%;
+    z-index: 2;
+  }
+  .p2-promo-text h2{
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 42px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p2-promo-text p{
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: var(--cream);
+    margin-bottom: 38px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p2-promo-text p:last-child{ margin-bottom: 0; }
+
+  .p2-promo-aero{
+    position: absolute;
+    left: calc(36.64% + 20px);
+    top: 0%;
+    width: 60.192%;
+    z-index: 2;
+  }
+  .p2-promo-washer{
+    position: absolute;
+    left: calc(6% - 50px);
+    top: calc(24% - 120px);
+    width: 50.82%;
+    z-index: 2;
+  }
+  .p2-promo-chrome-1{
+    left: calc(58% + 70px);
+    top: calc(20% + 120px);
+    width: 62.8%;
+    z-index: 3;
+  }
+  .p2-promo-ipad{
+    position: absolute;
+    left: 0;
+    top: calc(52% + 2px);
+    width: 100%;
+    z-index: 2;
+  }
+  .p2-promo-chrome-2{
+    left: calc(-36% + 50px);
+    top: 75%;
+    width: 50.188875%;
+    z-index: 3;
+  }
+  .p2-promo-bedding{
+    position: absolute;
+    left: 23.3344%;
+    top: calc(78% + 108px);
+    width: 76.6656%;
+    z-index: 2;
+  }
+
+  /* ---------- TELEGRAM REFRESH (block 7) ---------- */
+  .p2-tg{
+    position: relative;
+    margin-top: 200px;
+  }
+
+  .p2-tg-grid{
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    gap: 30px 40px;
+  }
+
+  .p2-tg-col{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .p2-tg-item{
+    position: relative;
+    z-index: 0;
+  }
+  .p2-tg-item img{ display: block; width: 100%; }
+
+  .p2-tg-text h2{
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p2-tg-text p{
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: var(--cream);
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
+  .p2-tg-btn{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 2.25px solid var(--cream);
+    color: var(--cream);
+    border-radius: 40px;
+    padding: 8px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: url('images/cursor-hand.png') 16 1, pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: opacity .25s ease, transform .18s ease;
+    will-change: transform;
+  }
+  .p2-tg-btn:hover{ opacity: 0.5; }
+  .p2-tg-btn.is-pressed{ transform: scale(0.85); }
+
+  .p2-tg-chrome-1{
+    position: absolute;
+    left: calc(70% + 50px);
+    top: 65%;
+    width: 90%;
+    z-index: 3;
+  }
+  .p2-tg-chrome-2{
+    position: absolute;
+    left: 40% !important;
+    top: 70%;
+    width: 85%;
+    z-index: -1;
+  }
+
+  .p2b7-img-speaker{
+    width: 90% !important;
+    margin-left: 30px;
+  }
+  .p2b7-img-ipad{
+    width: 85% !important;
+  
+  }
+  .p2b7-img-bunny{
+    width: 61.18% !important;
+    margin-left: auto;
+    display: block;
+  }
+  .p2b7-img-chat-1{
+    width: 110.88% !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .p2b7-img-chat-2{
+    width: 88.704% !important;
+    margin-left: auto;
+    display: block;
+  }
+  .p2b7-img-gels{
+    width: 90% !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    left: 50px;
+  }
+
+  /* ---------- MONTHLY SALES (block 8) ---------- */
+  .p2-sale{
+    position: relative;
+    margin-top: 100px;
+  }
+
+  .p2-sale-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 40px;
+  }
+
+  .p2-sale-item{
+    position: relative;
+    z-index: 0;
+  }
+  .p2-sale-item img{ display: block; width: 100%; }
+
+  .p2-sale-text h2{
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p2-sale-text p{
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: var(--cream);
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p2-sale-text p:last-child{ margin-bottom: 0; }
+
+  .p2-sale-full{
+    margin-bottom: 40px;
+  }
+  .p2-sale-full img{ display: block; width: 100%; }
+
+  .p2-sale-chrome-1{
+    left: -10%;
+    top: 100%;
+    width: 90%;
+    z-index: 2;
+  }
+  .p2-sale-chrome-2{
+    left: -20%;
+    top: 80%;
+    width: 67%;
+    z-index: 2;
+  }
+
+  .p2-sale-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+    margin-top: -70px;
+  }
+
+  /* ---------- SMALL SCREEN STUB ---------- */
+  .small-screen-stub{
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: var(--black);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .small-screen-stub-inner{
+    max-width: 480px;
+    text-align: center;
+  }
+  .small-screen-stub-inner{ position: relative; }
+  .small-screen-stub-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 30px;
+    line-height: 1.2;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .small-screen-stub-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: rgba(255,248,243,0.7);
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .small-screen-stub-cross{
+    left: 0;
+    right: 0;
+    top: auto;
+    width: 260px;
+    margin: 60px auto 0;
+  }
+  .small-screen-stub-cross img{ width: 100%; display: block; }
+
+  @media (max-width: 1023px){
+    .page, .page-loader{ display: none !important; }
+    .small-screen-stub{ display: flex; }
+    body{ overflow: hidden; }
   }
 </style>
 </head>
 <body class="is-loading">
+
+  <div class="small-screen-stub">
+    <div class="small-screen-stub-inner">
+      <div class="small-screen-stub-title">Этот сайт спроектирован<br>для&#8239;больших экранов</div>
+      <p class="small-screen-stub-text">Пожалуйста, откройте портфолио на&#8239;мониторе с&#8239;шириной экрана от&#8239;1024px или&#8239;попробуйте уменьшить масштаб страницы в&#8239;браузере.</p>
+      <div class="small-screen-stub-cross chrome-el" style="animation: levitate 5.3s ease-in-out infinite;"><img src="images/stub-cross.png" alt="" draggable="false"></div>
+    </div>
+  </div>
 
   <div class="page-loader" id="pageLoader">
     <div class="loader-circle"></div>
@@ -309,7 +635,7 @@
   <div class="page">
 
     <div class="p2-buttons">
-      <a href="#" id="nextPage">Следующая&#8239;страница <span class="p2-btn-arrow">→</span></a>
+      <a href="project-2025.html" id="nextPage">Следующая&#8239;страница <span class="p2-btn-arrow">→</span></a>
       <a href="index.html">На&#8239;главную</a>
     </div>
 
@@ -324,7 +650,7 @@
       </div>
       <div class="p2-text">
         <h2>Рефреш&#8201;визуального&#8201;языка</h2>
-        <p>Крупный командный проект по&#8239;обновлению визуальной коммуникации бренда, который затронул все коммуникации от&#8239;рекламных баннеров и&#8239;наружки до&#8239;фотостиля, оформления офлайн-мероприятий и&#8239;3D-графики. Катализатором перемен стало позиционирование бренда на&#8239;аудиторию К+: нужно было сделать образ бренда более взрослым и&#8239;премиальным, не&#8239;теряя при этом узнаваемости и&#8239;лёгкости, к&#8239;которой привыкли пользователи.</p>
+        <p>Крупный командный проект по&#8239;обновлению визуальной коммуникации бренда, который затронул все коммуникации от&#8239;рекламных баннеров и&#8239;наружки до&#8239;фотостиля, оформления офлайн-мероприятий и&#8239;3D-графики. Катализатором перемен стало позиционирование бренда на&#8239;аудиторию К+: нужно было сделать образ бренда более взрослым и&#8239;премиальным, не&#8239;теряя при&#8239;этом узнаваемости и&#8239;лёгкости, к&#8239;которой привыкли пользователи.</p>
         <p>Так родился новый визуальный стиль, который связывает digital-коммуникации, наружную рекламу, офлайн-активации в&#8239;одно целое.</p>
       </div>
 
@@ -353,23 +679,191 @@
       <div class="chrome-el p2-sc-chrome-2" style="animation: levitate2 5.2s ease-in-out infinite;"><img src="images/p2b4-chrome-2.png" alt="" draggable="false"></div>
     </section>
 
+    <section class="p2-video-wrap">
+      <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239021&hash=183d70607b81d027&hd=3&autoplay=1&loop=1&muted=1"
+        allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+        allowfullscreen></iframe>
+      <div class="p2-video-block"></div>
+    </section>
+
+    <section class="p2-promo">
+      <div class="p2-promo-text">
+        <h2>Глобал промо</h2>
+        <p>Постоянная рекламная кампания с&#8239;партнёрскими вендорскими товарами. Основными форматами являются наружная реклама и&#8239;часть диджитал-размещений.</p>
+        <p>Композиционным акцентом здесь выступает крупный текст, который работает просто, ёмко, без&#8239;лишних деталей в&#8239;связке с&#8239;изображением товара. При&#8239;этом кампания полностью наследует принципы, заданные в&#8239;рефреше визуального языка: тот&#8239;же&#8239;подход к&#8239;типографике, композиции и&#8239;фирменным элементам, только адаптированный под&#8239;быстрые, постоянно обновляемые макеты.</p>
+      </div>
+
+      <img class="p2-promo-aero" src="images/p2b6-video-placeholder.png" alt="" draggable="false">
+      <img class="p2-promo-washer" src="images/p2b6-outdoor-2.png" alt="" draggable="false">
+      <div class="chrome-el p2-promo-chrome-1" style="animation: levitate 5.4s ease-in-out infinite;"><img src="images/p2b6-chrome-1.png" alt="" draggable="false"></div>
+
+      <img class="p2-promo-ipad" src="images/p2b6-ipad.png" alt="" draggable="false">
+
+      <div class="chrome-el p2-promo-chrome-2" style="animation: levitate2 5.9s ease-in-out infinite;"><img src="images/p2b6-chrome-2.png" alt="" draggable="false"></div>
+      <img class="p2-promo-bedding" src="images/p2b6-outdoor-1.png" alt="" draggable="false">
+    </section>
+
+    <section class="p2-tg">
+      <div class="p2-tg-grid">
+        <div class="p2-tg-col">
+          <div class="p2-tg-item p2-tg-text">
+            <h2>Рефреш Телеграм канала Маркета</h2>
+            <p>Вместе с&#8239;обновлением визуального языка бренда потребовалось пересмотреть и&#8239;оформление SMM-канала в&#8239;Телеграм. Товарные карточки стали минималистичными, с&#8239;акцентом на&#8239;самом продукте, а&#8239;текст теперь просто информационное дополнение. Одиночные&#8239;же&#8239;баннеры наследуют принципы общего рефреша Маркета и&#8239;держат канал в&#8239;связке с&#8239;общим обновлённым стилем бренда.</p>
+            <a class="p2-tg-btn" href="https://t.me/marketbenefit" target="_blank" rel="noopener">Перейти&#8239;в&#8239;канал <span class="p2-btn-arrow">→</span></a>
+          </div>
+
+          <div class="p2-tg-item" style="margin-top: 90px;">
+            <img class="p2b7-img-speaker" src="images/p2b7-banner-1.png" alt="" draggable="false">
+            <div class="chrome-el p2-tg-chrome-1" style="animation: levitate 5.7s ease-in-out infinite;"><img src="images/p2b7-chrome-1.png" alt="" draggable="false"></div>
+          </div>
+
+          <div class="p2-tg-item">
+            <img class="p2b7-img-chat-1" src="images/p2b7-chat-1.png" alt="" draggable="false">
+          </div>
+
+          <div class="p2-tg-item">
+            <img class="p2b7-img-gels" src="images/p2b7-banner-3.png" alt="" draggable="false">
+          </div>
+        </div>
+
+        <div class="p2-tg-col">
+          <div class="p2-tg-item">
+            <img class="p2b7-img-ipad" src="images/p2b7-ipad.png" alt="" draggable="false">
+          </div>
+
+          <div class="p2-tg-item">
+            <img class="p2b7-img-bunny" src="images/p2b7-banner-2.png" alt="" draggable="false">
+          </div>
+
+          <div class="p2-tg-item">
+            <img class="p2b7-img-chat-2" src="images/p2b7-chat-2.png" alt="" draggable="false">
+            <div class="chrome-el p2-tg-chrome-2" style="animation: levitate2 6.2s ease-in-out infinite;"><img src="images/p2b7-chrome-2.png" alt="" draggable="false"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="p2-sale">
+      <div class="p2-sale-row">
+        <div class="p2-sale-item">
+          <img src="images/p2b8-phone1.png" alt="" draggable="false">
+        </div>
+
+        <div class="p2-sale-item p2-sale-text" style="z-index: 2;">
+          <h2>Ежемесячные&#8201;распродажи<br>и&#8239;заряженные&#8201;среды</h2>
+          <p>Регулярная продуктовая акция, визуал которой обновляется каждый месяц.</p>
+          <p>Для&#8239;коммуникации разработан визуал под&#8239;наружную рекламу, а&#8239;для&#8239;подсветки акции внутри продукта — цветовая система, где&#8239;каждому месяцу соответствует<br>свой оттенок. Это позволяет держать акцию узнаваемой и&#8239;при&#8239;этом каждый раз обновлять&#8239;её&#8239;звучание без&#8239;глобальных перемен.</p>
+          <div class="chrome-el p2-sale-chrome-1" style="animation: levitate 5.9s ease-in-out infinite;"><img src="images/p2b8-chrome-1.png" alt="" draggable="false"></div>
+        </div>
+      </div>
+
+      <div class="p2-sale-item p2-sale-full">
+        <div class="p2-video-wrap" style="margin-top: 0; margin-bottom: 0;">
+          <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239022&hash=84c194c3beba0e7e&hd=3&autoplay=1&loop=1&muted=1"
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+            allowfullscreen></iframe>
+          <div class="p2-video-block"></div>
+        </div>
+      </div>
+
+      <div class="p2-sale-row">
+        <div class="p2-sale-item">
+          <img src="images/p2b8-outdoor.png" alt="" draggable="false" style="margin-top: 120px;">
+        </div>
+
+        <div class="p2-sale-item" style="z-index: 2;">
+          <img src="images/p2b8-phone2.png" alt="" draggable="false">
+          <div class="chrome-el p2-sale-chrome-2" style="animation: levitate2 6.5s ease-in-out infinite;"><img src="images/p2b8-chrome-2.png" alt="" draggable="false"></div>
+        </div>
+      </div>
+
+      <div class="p2-sale-buttons">
+        <a class="p2-tg-btn" href="project-2025.html" id="nextPage2">Следующая&#8239;страница <span class="p2-btn-arrow">→</span></a>
+        <a class="p2-tg-btn" href="index.html">На&#8239;главную <span class="p2-btn-arrow">→</span></a>
+      </div>
+    </section>
+
   </div>
 
 <script>
-  window.addEventListener('load', () => {
+  function hideLoader() {
     document.getElementById('pageLoader').classList.add('is-hidden');
     document.body.classList.remove('is-loading');
-  });
+  }
+  window.addEventListener('load', hideLoader);
+  setTimeout(hideLoader, 4000);
 </script>
 <script>
-  document.querySelectorAll('.p2-buttons a').forEach(btn => {
+  document.querySelectorAll('.p2-buttons a, .p2-tg-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       btn.classList.add('is-pressed');
       void btn.offsetWidth;
-      setTimeout(() => btn.classList.remove('is-pressed'), 160);
+      setTimeout(() => btn.classList.remove('is-pressed'), 190);
     });
   });
 </script>
 
+
+<script>
+  // Cursor repel effect for decorative chrome shapes — triggers on proximity
+  // to the shape's nearest edge, not its center, so it dodges well before
+  // the cursor could ever actually land on it.
+  (function () {
+    const REPEL_RADIUS = 140;
+    const REPEL_STRENGTH = 46;
+    const els = Array.from(document.querySelectorAll('.chrome-el'));
+    if (!els.length) return;
+
+    // Cache each shape's box and only refresh it on resize/scroll, instead
+    // of calling getBoundingClientRect() on every mousemove — that call
+    // forces a synchronous layout/style recalculation, which is what was
+    // making this jittery in Safari.
+    let boxes = [];
+    function measure() {
+      boxes = els.map((el) => {
+        const r = el.getBoundingClientRect();
+        return { el, left: r.left, top: r.top, right: r.right, bottom: r.bottom, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+      });
+    }
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', measure, { passive: true });
+
+    let mouseX = -9999, mouseY = -9999;
+    let ticking = false;
+
+    function applyRepel() {
+      ticking = false;
+      boxes.forEach((b) => {
+        const nearestX = Math.max(b.left, Math.min(mouseX, b.right));
+        const nearestY = Math.max(b.top, Math.min(mouseY, b.bottom));
+        const edx = mouseX - nearestX;
+        const edy = mouseY - nearestY;
+        const edgeDist = Math.sqrt(edx * edx + edy * edy);
+
+        if (edgeDist < REPEL_RADIUS) {
+          const force = (1 - edgeDist / REPEL_RADIUS) * REPEL_STRENGTH;
+          const dx = b.cx - mouseX;
+          const dy = b.cy - mouseY;
+          const angle = Math.atan2(dy, dx);
+          const tx = Math.cos(angle) * force;
+          const ty = Math.sin(angle) * force;
+          b.el.style.translate = `${tx.toFixed(1)}px ${ty.toFixed(1)}px`;
+        } else {
+          b.el.style.translate = '0px 0px';
+        }
+      });
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(applyRepel);
+      }
+    });
+  })();
+</script>
 </body>
 </html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2025 — Яндекс Маркет — Виктория Митрофанова</title>
+<style>
+  @font-face {
+    font-family: 'JetBrains Mono';
+    src: url('fonts/JetBrainsMono-VariableFont.woff') format('woff');
+    font-weight: 100 800;
+  }
+
+  :root{
+    --cream: #FFF8F3;
+    --black: #070707;
+    --max: 1440px;
+    --inset: 60px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; cursor: inherit; }
+
+  html{ background: var(--black); cursor: url('images/cursor-arrow.png') 4 0, auto; }
+  a, button, .logo{ cursor: url('images/cursor-hand.png') 16 1, pointer; }
+  body{ overflow-x: hidden; }
+  @media (max-width: 1439px){
+    body{ overflow-x: auto; }
+  }
+
+  body{
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  /* ---------- PAGE LOADER ---------- */
+  .page-loader{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    transition: opacity .5s ease, visibility .5s ease;
+  }
+  .page-loader.is-hidden{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .loader-circle{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--cream);
+    animation: loaderPulse 1.1s ease-in-out infinite;
+  }
+  @keyframes loaderPulse{
+    0%, 100%{ opacity: 1; transform: scale(1); }
+    50%{ opacity: 0.25; transform: scale(0.8); }
+  }
+  .loader-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+  body.is-loading{ overflow: hidden; }
+
+  img{
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  .page{
+    width: var(--max);
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--inset);
+    position: relative;
+  }
+
+  @keyframes levitate{
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-14px); }
+    100% { transform: translateY(0px); }
+  }
+  @keyframes levitate2{
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-9px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .chrome-el{
+    position: absolute;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), translate .4s cubic-bezier(.22,1,.36,1);
+    will-change: transform, translate;
+    pointer-events: none;
+  }
+  .chrome-el img{ width: 100%; display: block; }
+
+  /* ---------- TOP BUTTONS ---------- */
+  .p3-buttons{
+    position: absolute;
+    right: 0;
+    top: 40px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+  }
+  .p3-buttons a{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 2.25px solid var(--cream);
+    color: var(--cream);
+    border-radius: 40px;
+    padding: 8px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: url('images/cursor-hand.png') 16 1, pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: opacity .25s ease, transform .18s ease;
+    will-change: transform;
+  }
+  .p3-buttons a:hover{ opacity: 0.5; }
+  .p3-buttons a.is-pressed{ transform: scale(0.85); }
+  .p3-btn-arrow{ font-size: 23.46px; line-height: 1; }
+
+  /* ---------- HERO (title + ring) ---------- */
+  .p3-hero{
+    position: relative;
+    padding-top: 40px;
+  }
+  .p3-title-img{
+    width: 100%;
+    display: block;
+  }
+  .p3-billboard-img{
+    width: 100% !important;
+  }
+  .p3-chrome-1{
+    right: 30%;
+    top: -75%;
+    width: 82%;
+    z-index: -1;
+  }
+
+  /* ---------- SHARED ITEM WRAPPER ---------- */
+  .p3-item{
+    position: relative;
+    z-index: 0;
+  }
+  .p3-item img{ display: block; width: 100%; }
+
+  .p3-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 70px;
+    align-items: start;
+  }
+  .p3-row-text{
+    grid-template-columns: 42.4% 1fr;
+  }
+
+  .p3-text h2{
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p3-text p{
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: var(--cream);
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p3-text p:last-child{ margin-bottom: 0; }
+
+  /* ---------- VIDEO (Экспресс) ---------- */
+  .p3-video-row{
+    position: relative;
+    width: 100%;
+    margin-top: 70px;
+  }
+  .p3-chrome-2{
+    left: -12%;
+    top: 30%;
+    width: 30%;
+    z-index: 5;
+  }
+  .p3-video-wrap{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1280 / 720;
+    background: #000;
+  }
+  .p3-video-wrap iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* ---------- PLACEHOLDER VIDEO SLOTS ---------- */
+  .p3-placeholder{
+    position: relative;
+    background: #D9D9D9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .p3-placeholder-16-9{
+    aspect-ratio: 16/9;
+    width: 80%;
+    margin: 0 auto;
+  }
+  .p3-placeholder-9-16{ aspect-ratio: 9/16; }
+
+  .p3-newyear-video-h{
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+    background: #000;
+  }
+  .p3-newyear-video-v{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9/16;
+    background: #000;
+  }
+  .p3-newyear-video-h iframe, .p3-newyear-video-v iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .p3-phone-img{
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    width: 100%;
+  }
+  .p3-row-9-16{
+    grid-template-columns: 9fr 16fr;
+  }
+
+  .p3-placeholder-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .p3-placeholder-label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    letter-spacing: 0.03em;
+    color: #4a4a4a;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .p3-play-icon{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #6b6b6b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .p3-play-icon svg{ margin-left: 4px; }
+
+  .p3-placeholders-group{
+    position: relative;
+    z-index: 0;
+  }
+
+  .p3-row-33{
+    margin-top: 70px;
+  }
+  .p3-chrome-3{
+    left: -7%;
+    top: -20%;
+    width: 35%;
+    z-index: 5;
+  }
+  .p3-chrome-4{
+    right: -25%;
+    top: 0%;
+    width: 45%;
+    z-index: 2;
+  }
+
+  /* ---------- BLOCK 2: 11.11 / Black Friday ---------- */
+  .p3b2{
+    position: relative;
+    z-index: 0;
+    margin-top: 100px;
+  }
+
+  .p3b2-top{
+    display: grid;
+    grid-template-columns: 60.6375% 1fr;
+    gap: 40px;
+    min-width: 0;
+  }
+
+  .p3b2-left{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    min-width: 0;
+  }
+  .p3b2-right{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    min-width: 0;
+  }
+
+  .p3b2-text h2{
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p3b2-text p{
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: var(--cream);
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p3b2-text p:last-child{ margin-bottom: 0; }
+
+  .p3b2-video-wrap{
+    position: relative;
+    width: 95.24%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    aspect-ratio: 1280 / 720;
+    background: #000;
+    overflow: hidden;
+  }
+  .p3b2-video-wrap iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .p3b2-bottom{
+    position: relative;
+    z-index: 0;
+    margin-top: 40px;
+  }
+  .p3b2-right .p3-placeholder-9-16{
+    width: 94.5%;
+    margin-left: 0;
+    margin-right: auto;
+  }
+  .p3b2-bottom .p3-placeholder-16-9{
+    width: 100%;
+  }
+  .p3b2-chrome{
+    right: -35%;
+    top: 48%;
+    width: 50%;
+    z-index: 2;
+  }
+
+  /* ---------- BLOCK 3: Uzbekistan launch ---------- */
+  .p3b3{
+    margin-top: 100px;
+    padding-bottom: 40px;
+    overflow: hidden;
+  }
+
+  .p3b3-top{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 40px;
+     z-index: -10;
+  }
+
+  .p3b3-text h2{
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p3b3-text p{
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: var(--cream);
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p3b3-text p:last-child{ margin-bottom: 0; }
+
+  .p3b3-missing-note{
+    grid-column: 1 / -1;
+  }
+
+  .p3b3-item{
+    position: relative;
+    z-index: -10;
+  }
+  .p3b3-item img{ display: block; width: 100%;
+  z-index: -11;
+  }
+
+  .p3b3-row2{
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+    z-index: -10;
+  }
+  .p3b3-chrome-1{
+    position: absolute;
+    right: -110%;
+    top: 50%;
+    width: 100%;
+    z-index: 9998;
+  }
+  
+  .p3b3-img-taxi{
+    position: absolute;
+    width: 92% !important;
+    margin-right: auto;
+    top: 6%;
+    display: block;
+    z-index: -10;
+  }
+    .p3b3-img-billboard{
+        width: 92% !important;
+        margin-left: auto;
+        display: block;
+      }
+
+  .p3b3-video-wrap{
+    position: relative;
+    z-index: 6;
+    width: 100%;
+    aspect-ratio: 1280 / 720;
+    background: #000;
+    margin-bottom: 40px;
+  }
+  .p3b3-video-wrap iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    pointer-events: none;
+  }
+  .p3b3-video-block{
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: transparent;
+  }
+  .p3b3-chrome-2{
+    left: 10%;
+    bottom: -80%;
+    width: 60%;
+    z-index: 1;
+  }
+
+  .p3b3-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .p3b3-btn{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 2.25px solid var(--cream);
+    color: var(--cream);
+    border-radius: 40px;
+    padding: 8px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: url('images/cursor-hand.png') 16 1, pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: opacity .25s ease, transform .18s ease;
+    will-change: transform;
+
+  }
+  .p3b3-btn:hover{ opacity: 0.5; }
+  .p3b3-btn.is-pressed{ transform: scale(0.85); }
+  /* ---------- SMALL SCREEN STUB ---------- */
+  .small-screen-stub{
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: var(--black);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .small-screen-stub-inner{
+    max-width: 480px;
+    text-align: center;
+  }
+  .small-screen-stub-inner{ position: relative; }
+  .small-screen-stub-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 30px;
+    line-height: 1.2;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .small-screen-stub-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: rgba(255,248,243,0.7);
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .small-screen-stub-cross{
+    left: 0;
+    right: 0;
+    top: auto;
+    width: 260px;
+    margin: 60px auto 0;
+  }
+  .small-screen-stub-cross img{ width: 100%; display: block; }
+
+  @media (max-width: 1023px){
+    .page, .page-loader{ display: none !important; }
+    .small-screen-stub{ display: flex; }
+    body{ overflow: hidden; }
+  }
+</style>
+</head>
+<body class="is-loading">
+
+  <div class="small-screen-stub">
+    <div class="small-screen-stub-inner">
+      <div class="small-screen-stub-title">Этот сайт спроектирован<br>для&#8239;больших экранов</div>
+      <p class="small-screen-stub-text">Пожалуйста, откройте портфолио на&#8239;мониторе с&#8239;шириной экрана от&#8239;1024px или&#8239;попробуйте уменьшить масштаб страницы в&#8239;браузере.</p>
+      <div class="small-screen-stub-cross chrome-el" style="animation: levitate 5.3s ease-in-out infinite;"><img src="images/stub-cross.png" alt="" draggable="false"></div>
+    </div>
+  </div>
+
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-circle"></div>
+    <div class="loader-text">Загрузка</div>
+  </div>
+
+  <div class="page">
+
+    <div class="p3-buttons">
+      <a href="project-2026.html">← Предыдущая&#8239;страница</a>
+      <a href="project-2024.html" id="nextPage3">Следующая&#8239;страница <span class="p3-btn-arrow">→</span></a>
+      <a href="index.html">На&#8239;главную</a>
+    </div>
+
+    <section class="p3-hero">
+      <img class="p3-title-img" src="images/p3-title.png" alt="2025 — Яндекс Маркет" draggable="false">
+    </section>
+
+    <div class="p3-row p3-row-text">
+      <div class="p3-item p3-text">
+        <h2>Новогодняя&#8201;распродажа</h2>
+        <p>Крупный ритейл-повод с&#8239;множеством активаций внутри одной идеи: наружная реклама, OLV, подсветка акции внутри других сервисов Яндекса, прямые эфиры и&#8239;офлайн-мероприятия.</p>
+        <p>Масштаб потребовал единой визуальной системы, которая одинаково работала&#8239;бы&#8239;и&#8239;на&#8239;билборде, и&#8239;в&#8239;эфире, и&#8239;на&#8239;праздничной локации с&#8239;узнаваемым настроением, но&#8239;без&#8239;потери связи с&#8239;общим стилем бренда. Новогоднее настроение на&#8239;всех форматах создаётся благодаря элементу, напоминающему конфетти, такому простому, но&#8239;при&#8239;этом узнаваемому.</p>
+      </div>
+
+      <div class="p3-item">
+        <img class="p3-billboard-img" src="images/p3-billboard.png" alt="" draggable="false">
+        <div class="chrome-el p3-chrome-1" style="animation: levitate 5.6s ease-in-out infinite;"><img src="images/p3-chrome-1.png" alt="" draggable="false"></div>
+      </div>
+    </div>
+
+    <div class="p3-video-row">
+      <div class="chrome-el p3-chrome-3" style="animation: levitate 6.3s ease-in-out infinite;"><img src="images/p3-chrome-2.png" alt="" draggable="false"></div>
+      <div class="p3-video-wrap">
+        <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239023&hash=d3524151d573039c&hd=3&autoplay=1&loop=1&muted=1"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="p3-placeholders-group">
+      <div class="p3-item p3-row-33">
+        <div class="p3-newyear-video-h">
+          <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239034&hd=3&autoplay=1&loop=1&muted=1"
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+            allowfullscreen></iframe>
+        </div>
+        <div class="chrome-el p3-chrome-4" style="animation: levitate2 5.4s ease-in-out infinite;"><img src="images/p3-chrome-4.png" alt="" draggable="false"></div>
+      </div>
+
+      <div class="chrome-el p3-chrome-2" style="animation: levitate2 6.1s ease-in-out infinite;"><img src="images/p3-chrome-3.png" alt="" draggable="false"></div>
+
+      <div class="p3-row p3-row-9-16">
+        <div class="p3-newyear-video-v">
+          <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239033&hd=3&autoplay=1&loop=1&muted=1"
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+            allowfullscreen></iframe>
+        </div>
+
+        <div class="p3-item">
+          <img class="p3-phone-img" src="images/p3-phone.png" alt="" draggable="false">
+        </div>
+      </div>
+    </div>
+
+    <div class="p3b2">
+      <div class="p3b2-top">
+        <div class="p3b2-left">
+          <div class="p3-item">
+            <img src="images/p3b2-billboard.png" alt="" draggable="false">
+          </div>
+
+          <div class="p3b2-video-wrap">
+            <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239024&hash=a416dea15ce2b018&hd=3&autoplay=1&loop=1&muted=1"
+              allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="p3b2-right">
+          <div class="p3b2-text">
+            <h2>Распродажа&#8201;11.11<br>и&#8239;Чёрная&#8201;пятница</h2>
+            <p>Самые крупные ритейл-поводы года для&#8239;любого e-commerce проекта. Связующим элементом кампании стал стикер с&#8239;логотипом акции. Простой и&#8239;минималистичный, он&#8239;оставляет<br>воздух в&#8239;макетах, но&#8239;при&#8239;этом расставляет нужный акцент.</p>
+            <p>Коммуникации охватили множество каналов: привычные DOOH и&#8239;OLV,<br>а&#8239;также эфиры внутри продукта<br>и&#8239;офлайн-активации.</p>
+          </div>
+
+          <div class="p3-newyear-video-v">
+            <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239029&hd=3&autoplay=1&loop=1&muted=1"
+              allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="chrome-el p3b2-chrome" style="animation: levitate 6s ease-in-out infinite;"><img src="images/p3b2-chrome.png" alt="" draggable="false"></div>
+
+      <div class="p3b2-bottom">
+        <div class="p3-newyear-video-h" style="width:100%;">
+          <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239031&hd=3&autoplay=1&loop=1&muted=1"
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="p3b3">
+      <div class="p3b3-top">
+        <div class="p3b3-text">
+          <h2>Запуск&#8201;Маркета&#8201;в&#8239;Узбекистане</h2>
+          <p>Крупный проект по&#8239;выходу на&#8239;зарубежный рынок со&#8239;своей рекламной кампанией, адаптированной под&#8239;местную аудиторию. Проект охватил большое количество носителей: от&#8239;привычных форматов наружной рекламы до&#8239;анимаций на&#8239;фасадах зданий Саммита, оклейки такси и&#8239;полноценного лонча бренд на&#8239;новом рынке. В&#8239;коммуникациях сохранили привычные брендовые красный и&#8239;жёлтый. Они помогали выстроить узнаваемость бренда с&#8239;нуля на&#8239;новом рынке.</p>
+          <p>Задачей было не&#8239;просто перенести стиль Маркета, а&#8239;адаптировать его под&#8239;контекст, сохранив при&#8239;этом целостность бренда.</p>
+        </div>
+
+        <div class="p3b3-item">
+          <img src="images/p3b3-bus.png" alt="" draggable="false">
+        </div>
+
+        <div class="p3b3-item p3b3-missing-note">
+          <img src="images/p3b3-placeholder.png" alt="" draggable="false">
+        </div>
+      </div>
+
+      <div class="p3b3-row2">
+        <div class="p3b3-item" style="z-index: 5;">
+          <img class="p3b3-img-billboard" src="images/p3b3-billboard.png" alt="" draggable="false">
+          <div class="chrome-el p3b3-chrome-1" style="animation: levitate 5.8s ease-in-out infinite;"><img src="images/p3b3-chrome-1.png" alt="" draggable="false"></div>
+        </div>
+        <div class="p3b3-item">
+          <img class="p3b3-img-taxi" src="images/p3b3-taxi.png" alt="" draggable="false">
+        </div>
+      </div>
+
+      <div class="p3b3-video-wrap">
+        <div class="chrome-el p3b3-chrome-2" style="animation: levitate2 6.4s ease-in-out infinite;"><img src="images/p3b3-chrome-2.png" alt="" draggable="false"></div>
+        <iframe src="https://vkvideo.ru/video_ext.php?oid=-240218189&id=456239025&hash=6c9634006e74a4be&hd=3&autoplay=1&loop=1&muted=1"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+          allowfullscreen></iframe>
+        <div class="p3b3-video-block"></div>
+      </div>
+
+      <div class="p3b3-buttons">
+        <a class="p3b3-btn" href="project-2026.html">← Предыдущая&#8239;страница</a>
+        <a class="p3b3-btn" href="project-2024.html">Следующая&#8239;страница <span class="p3-btn-arrow">→</span></a>
+        <a class="p3b3-btn" href="index.html">На&#8239;главную</a>
+      </div>
+    </div>
+
+  </div>
+<script>
+  function hideLoader() {
+    document.getElementById('pageLoader').classList.add('is-hidden');
+    document.body.classList.remove('is-loading');
+  }
+  window.addEventListener('load', hideLoader);
+  // Safety net: this page embeds third-party video iframes, which can
+  // delay or block the native window "load" event indefinitely. Never
+  // let the scroll-lock loader stay up forever because of that.
+  setTimeout(hideLoader, 4000);
+
+  document.querySelectorAll('.p3-buttons a, .p3b3-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.add('is-pressed');
+      void btn.offsetWidth;
+      setTimeout(() => btn.classList.remove('is-pressed'), 190);
+    });
+  });
+</script>
+
+
+<script>
+  // Cursor repel effect for decorative chrome shapes — triggers on proximity
+  // to the shape's nearest edge, not its center, so it dodges well before
+  // the cursor could ever actually land on it.
+  (function () {
+    const REPEL_RADIUS = 140;
+    const REPEL_STRENGTH = 46;
+    const els = Array.from(document.querySelectorAll('.chrome-el'));
+    if (!els.length) return;
+
+    // Cache each shape's box and only refresh it on resize/scroll, instead
+    // of calling getBoundingClientRect() on every mousemove — that call
+    // forces a synchronous layout/style recalculation, which is what was
+    // making this jittery in Safari.
+    let boxes = [];
+    function measure() {
+      boxes = els.map((el) => {
+        const r = el.getBoundingClientRect();
+        return { el, left: r.left, top: r.top, right: r.right, bottom: r.bottom, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+      });
+    }
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', measure, { passive: true });
+
+    let mouseX = -9999, mouseY = -9999;
+    let ticking = false;
+
+    function applyRepel() {
+      ticking = false;
+      boxes.forEach((b) => {
+        const nearestX = Math.max(b.left, Math.min(mouseX, b.right));
+        const nearestY = Math.max(b.top, Math.min(mouseY, b.bottom));
+        const edx = mouseX - nearestX;
+        const edy = mouseY - nearestY;
+        const edgeDist = Math.sqrt(edx * edx + edy * edy);
+
+        if (edgeDist < REPEL_RADIUS) {
+          const force = (1 - edgeDist / REPEL_RADIUS) * REPEL_STRENGTH;
+          const dx = b.cx - mouseX;
+          const dy = b.cy - mouseY;
+          const angle = Math.atan2(dy, dx);
+          const tx = Math.cos(angle) * force;
+          const ty = Math.sin(angle) * force;
+          b.el.style.translate = `${tx.toFixed(1)}px ${ty.toFixed(1)}px`;
+        } else {
+          b.el.style.translate = '0px 0px';
+        }
+      });
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(applyRepel);
+      }
+    });
+  })();
+</script>
+</body>
+</html>

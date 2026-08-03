@@ -26,11 +26,16 @@
     --inset: 60px;
   }
 
-  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; cursor: inherit; }
 
-  html, body{
-    background: var(--black);
-    overflow-x: hidden;
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  html{ background: var(--black); cursor: url('images/cursor-arrow.png') 4 0, auto; }
+  a, button, .logo{ cursor: url('images/cursor-hand.png') 16 1, pointer; }
+  body{ overflow-x: hidden; }
+  @media (max-width: 1439px){
+    body{ overflow-x: auto; }
   }
 
   body{
@@ -72,7 +77,7 @@
   }
   .loader-text{
     font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
+    font-size: 20.4px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--cream);
@@ -113,7 +118,7 @@
     letter-spacing: 0.03em;
     text-transform: uppercase;
     font-weight: 500;
-    cursor: pointer;
+    cursor: url('images/cursor-hand.png') 16 1, pointer;
   }
 
   nav{ display: flex; gap: 10px; }
@@ -128,11 +133,12 @@
     color: var(--black);
     border-radius: 40px;
     padding: 8px 34px;
-    cursor: pointer;
+    cursor: url('images/cursor-hand.png') 16 1, pointer;
     appearance: none;
     -webkit-appearance: none;
     outline: none;
     transition: opacity .25s ease, transform .18s ease;
+    will-change: transform;
   }
 
   nav button:hover{ opacity: 0.5; }
@@ -140,7 +146,7 @@
 
   /* ---------- PAGE: fluid up to a hard cap, centered, empty side margins beyond it ---------- */
   .page{
-    width: 100%;
+    width: var(--max);
     max-width: var(--max);
     margin: -60px auto 0;
     padding: 0 var(--inset);
@@ -155,39 +161,43 @@
   }
 
   @keyframes levitate{
-    0%   { transform: translateY(0px); }
-    50%  { transform: translateY(-14px); }
-    100% { transform: translateY(0px); }
+    0%   { transform:scale(0.7) translateY(0px); }
+    50%  { transform:scale(0.7) translateY(-14px); }
+    100% { transform:scale(0.7) translateY(0px); }
   }
   @keyframes levitate2{
-    0%   { transform: translateY(0px); }
-    50%  { transform: translateY(-9px); }
-    100% { transform: translateY(0px); }
+    0%   { transform:scale(0.7) translateY(0px); }
+    50%  { transform:scale(0.7) translateY(-9px); }
+    100% { transform:scale(0.7) translateY(0px); }
   }
   @keyframes levitate3{
-    0%   { transform: translateY(0px); }
-    50%  { transform: translateY(-19px); }
-    100% { transform: translateY(0px); }
+    0%   { transform:scale(0.7) translateY(0px); }
+    50%  { transform:scale(0.7) translateY(-19px); }
+    100% { transform:scale(0.7) translateY(0px); }
   }
   @keyframes levitate4{
-    0%   { transform: translateY(0px); }
-    50%  { transform: translateY(-11px); }
-    100% { transform: translateY(0px); }
+    0%   { transform:scale(0.7) translateY(0px); }
+    50%  { transform:scale(0.7) translateY(-11px); }
+    100% { transform:scale(0.7) translateY(0px); }
   }
 
   .chrome-el{
     position: absolute;
-    left:60%;
+    left:50%;
+    top: 200px !important;
+    transform: scale(0.7);
     animation: levitate 5s ease-in-out infinite;
-    transition: transform .35s cubic-bezier(.34,1.56,.64,1);
-    will-change: transform;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), translate .4s cubic-bezier(.22,1,.36,1);
+    will-change: transform, translate;
+    pointer-events: none;
+    
   }
   .chrome-el img{ width: 100%; display:block; }
 
   .hero-ring{
-    top: -10px;
+    top: 70px !important;
     left: 0;
-    width: 24%;
+    width: 26%;
     animation: levitate 5.4s ease-in-out infinite;
     animation-delay: 0s;
   }
@@ -350,27 +360,27 @@
   .icon-grid img{ width: 100%; display: block; }
 
   .skills-chrome-1{
-    left: calc(-6% - 50px);
-    top: calc(-10% - 15px);
-    width: 54.4%;
+    left: calc(-6% - 200px);
+    top: calc(10% - 320px) !important;
+    width: 75%;
     z-index: 1;
     animation: levitate2 4.7s ease-in-out infinite;
     animation-delay: .6s;
   }
   .skills-chrome-2{
     left: auto;
-    right: calc(4% - 140px);
-    top: 46%;
-    width: 19%;
+    right:calc(10% - 300px);
+    top: 29% !important;
+    width: 28%;
     z-index: 1;
     animation: levitate4 5.9s ease-in-out infinite;
     animation-delay: 2s;
   }
   .skills-chrome-3{
-    left: calc(40% + 100px);
-    bottom: calc(-34% + 500px);
-    width: 27.6%;
-    z-index: 1;
+    left: calc(40% - 50px);
+    bottom: calc(-34% - 450px);
+    width: 42%;
+    z-index: 3;
     animation: levitate 6.6s ease-in-out infinite;
     animation-delay: 1.4s;
   }
@@ -402,7 +412,7 @@
     display: block;
     overflow: hidden;
     z-index: 3;
-    cursor: pointer;
+    cursor: url('images/cursor-hand.png') 16 1, pointer;
     transition: transform .35s cubic-bezier(.25,.8,.35,1);
   }
   .project-card:hover{ transform: scale(0.96); }
@@ -437,26 +447,26 @@
   .card-4{ left: 42.5%; top: 68.8%; width: 37.1%; }
 
   .projects-chrome-1{
-    left: 46.7%;
-    top: calc(20.2% - 50px);
-    width: 49.3%;
+    left: 32%;
+    top: 220px !important;
+    width: 75%;
     z-index: 4;
     animation: levitate3 5.2s ease-in-out infinite;
     animation-delay: .3s;
   }
   .projects-chrome-2{
-    left: 83.7%;
-    top: 56.9%;
-    width: 22.9%;
+    left: 75%;
+    top: 57% !important;
+    width: 35%;
     z-index: 6;
     animation: levitate2 6.4s ease-in-out infinite;
     animation-delay: 1.7s;
   }
   .projects-chrome-3{
-    left: calc(4.8% + 40px);
-    top: 74.4%;
-    width: 47.4%;
-    z-index: 10;
+    left: calc(4.8% - 110px);
+    top: 69% !important;
+    width: 65%;
+    z-index: 0;
     animation: levitate4 5.6s ease-in-out infinite;
     animation-delay: .9s;
   }
@@ -480,9 +490,9 @@
   }
 
   .contacts-chrome-bottom{
-    left: 17%;
-    top: calc(20% + 85px);
-    width: 66%;
+    left: 0%;
+    top: 0% !important;
+    width: 100%;
     z-index: 3;
     animation: levitate 6.8s ease-in-out infinite;
     animation-delay: .5s;
@@ -540,17 +550,76 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    cursor: pointer;
+    cursor: url('images/cursor-hand.png') 16 1, pointer;
     appearance: none;
     -webkit-appearance: none;
     transition: opacity .25s ease, transform .18s ease;
+    will-change: transform;
   }
   .contacts-buttons a:hover{ opacity: 0.5; }
   .contacts-buttons a.is-pressed{ transform: scale(0.85); }
   .btn-arrow{ font-size: 23.46px; line-height: 1; }
+  /* ---------- SMALL SCREEN STUB ---------- */
+  .small-screen-stub{
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: var(--black);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .small-screen-stub-inner{
+    max-width: 480px;
+    text-align: center;
+  }
+  .small-screen-stub-inner{ position: relative; }
+  .small-screen-stub-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 30px;
+    line-height: 1.2;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .small-screen-stub-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: rgba(255,248,243,0.7);
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .small-screen-stub-cross{
+    left: 0;
+    right: 0;
+    top: auto;
+    width: 260px;
+    margin: 60px auto 0;
+  }
+  .small-screen-stub-cross img{ width: 100%; display: block; }
+
+  @media (max-width: 1023px){
+    .page, .page-loader{ display: none !important; }
+    .small-screen-stub{ display: flex; }
+    body{ overflow: hidden; }
+  }
 </style>
 </head>
 <body class="is-loading">
+
+  <div class="small-screen-stub">
+    <div class="small-screen-stub-inner">
+      <div class="small-screen-stub-title">Этот сайт спроектирован<br>для&#8239;больших экранов</div>
+      <p class="small-screen-stub-text">Пожалуйста, откройте портфолио на&#8239;мониторе с&#8239;шириной экрана от&#8239;1024px или&#8239;попробуйте уменьшить масштаб страницы в&#8239;браузере.</p>
+      <div class="small-screen-stub-cross chrome-el" style="animation: levitate 5.3s ease-in-out infinite;"><img src="images/stub-cross.png" alt="" draggable="false"></div>
+    </div>
+  </div>
 
   <div class="page-loader" id="pageLoader">
     <div class="loader-circle"></div>
@@ -588,7 +657,7 @@
         <h2>Привет!</h2>
         <p>Я&#8239;Вика — дизайнер коммуникаций. Последние 5&#8239;лет я&#8239;работаю в&#8239;маркетинге и&#8239;помогаю брендам строить свой уникальный визуальный язык.</p>
         <p>Я&#8239;специализируюсь на&#8239;разных задачах от&#8239;создания айдентики, до&#8239;сборки понятных, рабочих гайдлайнов и&#8239;дирекшена.</p>
-        <p>Мой бэкграунд позволяет мне смотреть на&#8239;дизайн не&#8239;только как&#8239;на эстетику, но&#8239;и как&#8239;на инструмент, который помогает выстраивать коммуникацию с&#8239;пользователем.</p>
+        <p>Мой бэкграунд позволяет мне смотреть на&#8239;дизайн не&#8239;только как&#8239;на&#8239;эстетику, но&#8239;и&#8239;как&#8239;на&#8239;инструмент, который помогает выстраивать коммуникацию с&#8239;пользователем.</p>
       </div>
     </section>
 
@@ -685,26 +754,26 @@
           </div>
         </a>
 
-        <div class="project-card card-2">
+        <a class="project-card card-2" href="project-2025.html">
           <div class="card-inner">
             <img class="card-bw" src="images/project-2025.png" alt="" draggable="false">
             <img class="card-color" src="images/project-2025-color.png" alt="" draggable="false">
           </div>
-        </div>
+        </a>
 
-        <div class="project-card card-3">
+        <a class="project-card card-3" href="project-2024.html">
           <div class="card-inner">
             <img class="card-bw" src="images/project-2024.png" alt="" draggable="false">
             <img class="card-color" src="images/project-2024-color.png" alt="" draggable="false">
           </div>
-        </div>
+        </a>
 
-        <div class="project-card card-4">
+        <a class="project-card card-4" href="project-3d.html">
           <div class="card-inner">
             <img class="card-bw" src="images/project-3d.png" alt="" draggable="false">
             <img class="card-color" src="images/project-3d-color.png" alt="" draggable="false">
           </div>
-        </div>
+        </a>
 
         <div class="chrome-el projects-chrome-1"><img src="images/projects-chrome-1.png" alt="" draggable="false"></div>
         <div class="chrome-el projects-chrome-2"><img src="images/projects-chrome-2.png" alt="" draggable="false"></div>
@@ -752,7 +821,7 @@
     btn.addEventListener('click', () => {
       btn.classList.add('is-pressed');
       void btn.offsetWidth; // force reflow so Safari registers the state before it's removed
-      setTimeout(() => btn.classList.remove('is-pressed'), 160);
+      setTimeout(() => btn.classList.remove('is-pressed'), 190);
 
       const target = document.getElementById(btn.dataset.target);
       if (target) {
@@ -765,10 +834,72 @@
     btn.addEventListener('click', () => {
       btn.classList.add('is-pressed');
       void btn.offsetWidth;
-      setTimeout(() => btn.classList.remove('is-pressed'), 160);
+      setTimeout(() => btn.classList.remove('is-pressed'), 190);
     });
   });
 </script>
 
+
+<script>
+  // Cursor repel effect for decorative chrome shapes — triggers on proximity
+  // to the shape's nearest edge, not its center, so it dodges well before
+  // the cursor could ever actually land on it.
+  (function () {
+    const REPEL_RADIUS = 140;
+    const REPEL_STRENGTH = 46;
+    const els = Array.from(document.querySelectorAll('.chrome-el'));
+    if (!els.length) return;
+
+    // Cache each shape's box and only refresh it on resize/scroll, instead
+    // of calling getBoundingClientRect() on every mousemove — that call
+    // forces a synchronous layout/style recalculation, which is what was
+    // making this jittery in Safari.
+    let boxes = [];
+    function measure() {
+      boxes = els.map((el) => {
+        const r = el.getBoundingClientRect();
+        return { el, left: r.left, top: r.top, right: r.right, bottom: r.bottom, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+      });
+    }
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', measure, { passive: true });
+
+    let mouseX = -9999, mouseY = -9999;
+    let ticking = false;
+
+    function applyRepel() {
+      ticking = false;
+      boxes.forEach((b) => {
+        const nearestX = Math.max(b.left, Math.min(mouseX, b.right));
+        const nearestY = Math.max(b.top, Math.min(mouseY, b.bottom));
+        const edx = mouseX - nearestX;
+        const edy = mouseY - nearestY;
+        const edgeDist = Math.sqrt(edx * edx + edy * edy);
+
+        if (edgeDist < REPEL_RADIUS) {
+          const force = (1 - edgeDist / REPEL_RADIUS) * REPEL_STRENGTH;
+          const dx = b.cx - mouseX;
+          const dy = b.cy - mouseY;
+          const angle = Math.atan2(dy, dx);
+          const tx = Math.cos(angle) * force;
+          const ty = Math.sin(angle) * force;
+          b.el.style.translate = `${tx.toFixed(1)}px ${ty.toFixed(1)}px`;
+        } else {
+          b.el.style.translate = '0px 0px';
+        }
+      });
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(applyRepel);
+      }
+    });
+  })();
+</script>
 </body>
 </html>

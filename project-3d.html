@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D проекты — личные — Виктория Митрофанова</title>
+<style>
+  @font-face {
+    font-family: 'JetBrains Mono';
+    src: url('fonts/JetBrainsMono-VariableFont.woff') format('woff');
+    font-weight: 100 800;
+  }
+
+  :root{
+    --cream: #FFF8F3;
+    --black: #070707;
+    --max: 1440px;
+    --inset: 60px;
+
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; cursor: inherit; }
+
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  html{ background: var(--black); cursor: url('images/cursor-arrow.png') 4 0, auto; }
+  a, button, .logo{ cursor: url('images/cursor-hand.png') 16 1, pointer; }
+  body{ overflow-x: hidden; }
+  @media (max-width: 1439px){
+    body{ overflow-x: auto; }
+  }
+
+  body{
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  /* ---------- PAGE LOADER ---------- */
+  .page-loader{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    transition: opacity .5s ease, visibility .5s ease;
+  }
+  .page-loader.is-hidden{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .loader-circle{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--cream);
+    animation: loaderPulse 1.1s ease-in-out infinite;
+  }
+  @keyframes loaderPulse{
+    0%, 100%{ opacity: 1; transform: scale(1); }
+    50%{ opacity: 0.25; transform: scale(0.8); }
+  }
+  .loader-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+  body.is-loading{ overflow: hidden; }
+
+  img{
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  .page{
+    width: var(--max);
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--inset) 60px;
+    position: relative;
+  }
+
+  @keyframes levitate{
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-14px); }
+    100% { transform: translateY(0px); }
+  }
+  @keyframes levitate2{
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-9px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .chrome-el{
+    position: absolute;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), translate .4s cubic-bezier(.22,1,.36,1);
+    will-change: transform, translate;
+    pointer-events: none;
+  }
+  .chrome-el img{ width: 100%; display: block; }
+
+  /* ---------- TOP BUTTONS ---------- */
+  .p5-buttons{
+    position: absolute;
+    right: 0;
+    top: 40px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+
+  }
+  .p5-buttons a, .p5-btn-bottom{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 2.25px solid var(--cream);
+    color: var(--cream);
+    border-radius: 40px;
+    padding: 8px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: url('images/cursor-hand.png') 16 1, pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: opacity .25s ease, transform .18s ease;
+    will-change: transform;
+  }
+  .p5-buttons a:hover, .p5-btn-bottom:hover{ opacity: 0.5; }
+  .p5-buttons a.is-pressed, .p5-btn-bottom.is-pressed{ transform: scale(0.85); }
+
+  /* ---------- HERO (title + ring) ---------- */
+  .p5-hero{
+    position: relative;
+    padding-top: 40px;
+    overflow: hidden;
+
+  }
+  .p5-title-img{
+    width: 100%;
+    display: block;
+  }
+  .p5-chrome-1{
+    left: 12%;
+    top: -480px;
+    width: 75%;
+    z-index: -9;
+  }
+
+  /* ---------- SHARED ITEM WRAPPER ---------- */
+  .p5-item{
+    position: relative;
+    z-index: 0;
+
+  }
+  .p5-item img{ display: block; width: 100%; }
+  .p5-item video{ display: block; width: 100%; }
+
+  .p5-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 70px;
+    align-items: start;
+  }
+  .p5-row-32-68{
+    grid-template-columns: 32% 1fr;
+  }
+  .p5-row-60-40{
+    grid-template-columns: 68% 1fr;
+  }
+  .p5-row-68-32{
+    grid-template-columns: 1fr 32%;
+  }
+  .p5-row-44-56{
+    grid-template-columns: 43.7% 1fr;
+  }
+  .p5-row-47-53{
+    grid-template-columns: 47.7% 1fr;
+  }
+  .p5-row-40-60{
+    grid-template-columns: 40% 1fr;
+  }
+  .p5-jewelry-wrap{
+    width: 70%;
+    margin: 0 auto;
+  }
+  .p5-bathroom-wrap{
+    width: 86%;
+    margin: 0 auto;
+  }
+
+  .p5-full{
+    margin-top: 70px;
+    overflow: hidden;
+  }
+
+  .p5-text p{
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: var(--cream);
+    margin-bottom: 30px;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .p5-text p:last-child{ margin-bottom: 0; }
+
+  .p5-chrome-2{
+    right: -50%;
+    bottom: -230%;
+    width: 180%;
+    z-index: 10;
+  }
+  .p5-miku-item{ z-index: -1; }
+
+  .p5-stack{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .p5-ring-block{
+    position: relative;
+    display: block;
+    right: 50%;
+    bottom: -45%;
+    width: 132%;
+  }
+  .p5-chrome-6{
+    right: -190%;
+    top: -310%;
+    width: 80%;
+    z-index: 10;
+  }
+
+  .p5-chrome-3{
+    left: -10%;
+    bottom: -15%;
+    width: %;
+    z-index: 2;
+  }
+
+  .p5-chrome-4{ 
+    position: absolute;
+    right: -8%;
+    top: -15%;
+    width: 106%;
+    z-index: 2;
+  }
+
+  .p5-chrome-5{
+    left: -33%;
+    bottom: -70%;
+    width: 100%;
+    z-index: 2;
+    object-fit: cover;
+    display: none;
+  }
+
+  .p5-buttons-bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+    margin-top: -104px;
+  }
+  /* ---------- SMALL SCREEN STUB ---------- */
+  .small-screen-stub{
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: var(--black);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .small-screen-stub-inner{
+    max-width: 480px;
+    text-align: center;
+  }
+  .small-screen-stub-inner{ position: relative; }
+  .small-screen-stub-title{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 38.76px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 30px;
+    line-height: 1.2;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .small-screen-stub-text{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20.4px;
+    line-height: 24.412px;
+    color: rgba(255,248,243,0.7);
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+  .small-screen-stub-cross{
+    left: 0;
+    right: 0;
+    top: auto;
+    width: 260px;
+    margin: 60px auto 0;
+  }
+  .small-screen-stub-cross img{ width: 100%; display: block; }
+
+  @media (max-width: 1023px){
+    .page, .page-loader{ display: none !important; }
+    .small-screen-stub{ display: flex; }
+    body{ overflow: hidden; }
+  }
+</style>
+</head>
+<body class="is-loading">
+
+  <div class="small-screen-stub">
+    <div class="small-screen-stub-inner">
+      <div class="small-screen-stub-title">Этот сайт спроектирован<br>для&#8239;больших экранов</div>
+      <p class="small-screen-stub-text">Пожалуйста, откройте портфолио на&#8239;мониторе с&#8239;шириной экрана от&#8239;1024px или&#8239;попробуйте уменьшить масштаб страницы в&#8239;браузере.</p>
+      <div class="small-screen-stub-cross chrome-el" style="animation: levitate 5.3s ease-in-out infinite;"><img src="images/stub-cross.png" alt="" draggable="false"></div>
+    </div>
+  </div>
+
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-circle"></div>
+    <div class="loader-text">Загрузка</div>
+  </div>
+
+  <div class="page">
+
+    <div class="p5-buttons">
+      <a href="project-2024.html">← Предыдущая&#8239;страница</a>
+      <a href="index.html">На&#8239;главную</a>
+    </div>
+
+    <section class="p5-hero">
+      <img class="p5-title-img" src="images/p5-title.png" alt="3D проекты — личные" draggable="false">
+      <div class="chrome-el p5-chrome-1" style="animation: levitate 5.6s ease-in-out infinite;"><img src="images/p5-chrome-1.png" alt="" draggable="false"></div>
+    </section>
+
+    <div class="p5-row p5-row-60-40">
+      <div class="p5-item p5-miku-item">
+        <img src="images/p5-miku.jpg" alt="" draggable="false">
+      </div>
+
+      <div class="p5-item p5-text">
+        <p>Здесь собраны некоторые из&#8239;личных некоммерческих 3D-проектов.<br>Это моё пространство для&#8239;экспериментов вне&#8239;рабочих задач без&#8239;брифов и&#8239;дедлайнов, зато&#8239;со&#8239;свободой пробовать новые формы, материалы и&#8239;подходы к&#8239;рендеру. Именно на&#8239;таких проектах часто рождаются идеи, которые потом находят применение и&#8239;в&#8239;работе.</p>
+        <div class="chrome-el p5-chrome-2" style="animation: levitate2 6.2s ease-in-out infinite;"><img src="images/p5-chrome-2.png" alt="" draggable="false"></div>
+      </div>
+    </div>
+
+    <div class="p5-row p5-row-32-68">
+      <div class="p5-stack">
+        <div class="p5-item">
+          <img src="images/p5-bakery-1.png" alt="" draggable="false">
+        </div>
+        <div class="p5-item">
+          <img src="images/p5-bakery-2.png" alt="" draggable="false">
+        </div>
+      </div>
+      <div class="p5-item">
+        <img src="images/p5-bakery-big.png" alt="" draggable="false">
+      </div>
+    </div>
+
+    <div class="p5-row p5-row-68-32">
+      <div class="p5-item">
+        <img src="images/p5-room-big.png" alt="" draggable="false">
+      </div>
+      <div class="p5-stack">
+        <div class="p5-item">
+          <img src="images/p5-room-1.png" alt="" draggable="false">
+        </div>
+        <div class="p5-item">
+          <img src="images/p5-room-2.png" alt="" draggable="false">
+        </div>
+      </div>
+    </div>
+
+    <div class="p5-item p5-full p5-jewelry-wrap">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="video/mirror.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="p5-row p5-row-68-32">
+      <div class="p5-item">
+        <img src="images/p5-tea-big.png" alt="" draggable="false">
+      </div>
+      <div class="p5-stack">
+        <div class="p5-item">
+          <img src="images/p5-tea-1.png" alt="" draggable="false">
+        </div>
+        <div class="p5-item">
+          <img src="images/p5-tea-2.png" alt="" draggable="false">
+        </div>
+      </div>
+    </div>
+
+    <div class="p5-item p5-full p5-bathroom-wrap">
+      <img src="images/p5-bathroom.png" alt="" draggable="false">
+    </div>
+
+    <div class="p5-row p5-row-40-60">
+      <div class="p5-stack">
+        <img class="p5-ring-block" src="images/p5-chrome-4.png" alt="" draggable="false" style="animation: levitate 5.9s ease-in-out infinite;">
+        <div class="p5-item" style="margin-top: -280px; z-index: 3;">
+          <img src="images/p5-piggy-small.png" alt="" draggable="false">
+          <div class="chrome-el p5-chrome-6" style="animation: levitate2 6.3s ease-in-out infinite;"><img src="images/p5-chrome-6.png" alt="" draggable="false"></div>
+        </div>
+      </div>
+      <div class="p5-item p5-jiraf-item">
+        <img src="images/p5-jiraf.png" alt="" draggable="false">
+      </div>
+    </div>
+
+    <div class="p5-row p5-row-47-53">
+      <div class="p5-item p5-mabel-wrap" style="margin-top: -20px;">
+        <img src="images/p5-mabel.png" alt="" draggable="false">
+      </div>
+      <div class="p5-item" style="margin-top: -120px;">
+        <img src="images/p5-japanese-room.png" alt="" draggable="false" style="width: 90%;">
+        <div class="chrome-el p5-chrome-5" style="animation: levitate 6.1s ease-in-out infinite;"><img src="images/p5-chrome-5.png" alt="" draggable="false"></div>
+      </div>
+    </div>
+
+    <div class="p5-buttons-bottom">
+      <a class="p5-btn-bottom" href="project-2024.html">← Предыдущая&#8239;страница</a>
+      <a class="p5-btn-bottom" href="index.html">На&#8239;главную</a>
+    </div>
+
+  </div>
+
+<script>
+  function hideLoader() {
+    document.getElementById('pageLoader').classList.add('is-hidden');
+    document.body.classList.remove('is-loading');
+  }
+  window.addEventListener('load', hideLoader);
+  setTimeout(hideLoader, 4000);
+
+  document.querySelectorAll('.p5-buttons a, .p5-btn-bottom').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.add('is-pressed');
+      void btn.offsetWidth;
+      setTimeout(() => btn.classList.remove('is-pressed'), 190);
+    });
+  });
+</script>
+
+
+<script>
+  // Cursor repel effect for decorative chrome shapes — triggers on proximity
+  // to the shape's nearest edge, not its center, so it dodges well before
+  // the cursor could ever actually land on it.
+  (function () {
+    const REPEL_RADIUS = 140;
+    const REPEL_STRENGTH = 46;
+    const els = Array.from(document.querySelectorAll('.chrome-el, .p5-ring-block'));
+    if (!els.length) return;
+
+    // Cache each shape's box and only refresh it on resize/scroll, instead
+    // of calling getBoundingClientRect() on every mousemove — that call
+    // forces a synchronous layout/style recalculation, which is what was
+    // making this jittery in Safari.
+    let boxes = [];
+    function measure() {
+      boxes = els.map((el) => {
+        const r = el.getBoundingClientRect();
+        return { el, left: r.left, top: r.top, right: r.right, bottom: r.bottom, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+      });
+    }
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('scroll', measure, { passive: true });
+
+    let mouseX = -9999, mouseY = -9999;
+    let ticking = false;
+
+    function applyRepel() {
+      ticking = false;
+      boxes.forEach((b) => {
+        const nearestX = Math.max(b.left, Math.min(mouseX, b.right));
+        const nearestY = Math.max(b.top, Math.min(mouseY, b.bottom));
+        const edx = mouseX - nearestX;
+        const edy = mouseY - nearestY;
+        const edgeDist = Math.sqrt(edx * edx + edy * edy);
+
+        if (edgeDist < REPEL_RADIUS) {
+          const force = (1 - edgeDist / REPEL_RADIUS) * REPEL_STRENGTH;
+          const dx = b.cx - mouseX;
+          const dy = b.cy - mouseY;
+          const angle = Math.atan2(dy, dx);
+          const tx = Math.cos(angle) * force;
+          const ty = Math.sin(angle) * force;
+          b.el.style.translate = `${tx.toFixed(1)}px ${ty.toFixed(1)}px`;
+        } else {
+          b.el.style.translate = '0px 0px';
+        }
+      });
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(applyRepel);
+      }
+    });
+  })();
+</script>
+</body>
+</html>
