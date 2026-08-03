@@ -353,6 +353,18 @@
     width: 60.192%;
     z-index: 2;
   }
+  .p2-promo-video-wrap{
+    aspect-ratio: 1096 / 1248;
+    background: #000;
+    overflow: hidden;
+  }
+  .p2-promo-video-wrap iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
   .p2-promo-washer{
     position: absolute;
     left: calc(6% - 50px);
@@ -708,7 +720,11 @@
         <p>Композиционным акцентом здесь выступает крупный текст, который работает просто, ёмко, без&#8239;лишних деталей в&#8239;связке с&#8239;изображением товара. При&#8239;этом кампания полностью наследует принципы, заданные в&#8239;рефреше визуального языка: тот&#8239;же&#8239;подход к&#8239;типографике, композиции и&#8239;фирменным элементам, только адаптированный под&#8239;быстрые, постоянно обновляемые макеты.</p>
       </div>
 
-      <img class="p2-promo-aero" src="images/p2b6-video-placeholder.png" alt="" draggable="false">
+      <div class="p2-promo-aero p2-promo-video-wrap">
+        <iframe src="https://kinescope.io/embed/aTEP1LvrFxhCsDBswzAoqw?autoplay=1&muted=1&loop=1"
+          allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;"
+          allowfullscreen></iframe>
+      </div>
       <img class="p2-promo-washer" src="images/p2b6-outdoor-2.png" alt="" draggable="false">
       <div class="chrome-el p2-promo-chrome-1" style="animation: levitate 5.4s ease-in-out infinite;"><img src="images/p2b6-chrome-1.png" alt="" draggable="false"></div>
 

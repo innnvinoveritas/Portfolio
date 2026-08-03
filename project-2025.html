@@ -435,6 +435,19 @@
   .p3b3-missing-note{
     grid-column: 1 / -1;
   }
+  .p3b3-video-wrap2{
+    position: relative;
+    aspect-ratio: 1920 / 1080;
+    background: #000;
+    overflow: hidden;
+  }
+  .p3b3-video-wrap2 iframe{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
 
   .p3b3-item{
     position: relative;
@@ -724,8 +737,10 @@
           <img src="images/p3b3-bus.png" alt="" draggable="false">
         </div>
 
-        <div class="p3b3-item p3b3-missing-note">
-          <img src="images/p3b3-placeholder.png" alt="" draggable="false">
+        <div class="p3b3-item p3b3-missing-note p3b3-video-wrap2">
+          <iframe src="https://kinescope.io/embed/8QCXGhkui9HYXpJzyAAdEK?autoplay=1&muted=1&loop=1"
+            allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;"
+            allowfullscreen></iframe>
         </div>
       </div>
 
@@ -756,10 +771,8 @@
 
   </div>
 <script>
-  // These videos get auto-paused by the browser once they scroll out of
-  // view (a real, common power-saving behavior for autoplaying media).
-  // Instead of loading once and hoping it keeps playing, we keep watching
-  // each one and force a restart every time it actually becomes visible.
+  // Load/restart these video iframes whenever they're actually visible in
+  // the viewport, instead of all firing autoplay at once on page load.
   (function () {
     const lazyVideos = document.querySelectorAll('.lazy-autoplay-video');
     if (!lazyVideos.length) return;
